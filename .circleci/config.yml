@@ -10,9 +10,21 @@ jobs:
 				name: npm build
 				command: |
 					echo "Hello World!"
+  build:
+		docker:
+			-image: circleci/node:12.14.1
+		steps:
+			-checkout
+      -run:
+				name: npm build
+				command: |
+					echo "Hello World!"
 
 workflows:
 	version: 2
 	pr-check-workflow:
 		jobs:
 			-pr_check
+  build-deploy-workflow:
+		jobs:
+			-build
